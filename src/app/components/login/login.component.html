@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4 py-5">
+      <h1 class="text-center mb-3">{{title}}</h1>
+      <h3 class="text-center mb-4">{{desc}}</h3>
+
+      <div class="alert alert-danger" *ngIf="status === 'error'">
+        Invalid email or password
+      </div>
+
+      <div class="card shadow">
+        <div class="card-body">
+          <div class="text-center mb-4">
+            <img class="rounded-circle shadow-sm" width="40%" src="assets/img/linux-avatar.png" alt="User avatar">
+          </div>
+
+          <form (ngSubmit)="login()" [formGroup]="myForm">
+            <div class="mb-3">
+              <input 
+                type="email" 
+                class="form-control" 
+                formControlName="email" 
+                placeholder="Email" 
+                [class.is-invalid]="myForm.get('email')?.touched && myForm.get('email')?.invalid"
+                required
+              />
+              <div class="invalid-feedback" *ngIf="myForm.get('email')?.touched && myForm.get('email')?.invalid">
+                Invalid email
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <input 
+                type="password" 
+                class="form-control" 
+                formControlName="password" 
+                placeholder="Password" 
+                [class.is-invalid]="myForm.get('password')?.touched && myForm.get('password')?.invalid"
+                required
+              />
+              <div class="invalid-feedback" *ngIf="myForm.get('password')?.touched && myForm.get('password')?.invalid">
+                Invalid password
+              </div>
+            </div>
+
+            <button 
+              type="submit" 
+              class="btn btn-success btn-lg w-100" 
+              [disabled]="!myForm.valid"
+            >
+              Login
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
